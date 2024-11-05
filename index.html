@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compteur depuis une date passée</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .counter-container {
+            text-align: center;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            width: 250px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .counter {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        .label {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter-container">
+        <h1>Temps écoulé depuis le 2 octobre 2024</h1>
+        <div class="counter" id="days">00 <span class="label">Jours</span></div>
+        <div class="counter" id="hours">00 <span class="label">Heures</span></div>
+        <div class="counter" id="minutes">00 <span class="label">Minutes</span></div>
+        <div class="counter" id="seconds">00 <span class="label">Secondes</span></div>
+    </div>
+
+    <script>
+        // Date de départ (2 octobre 2024)
+        const startDate = new Date('2024-10-02T00:00:00').getTime();
+
+        // Mettre à jour le compteur toutes les secondes
+        setInterval(() => {
+            const now = new Date().getTime();
+            const timeElapsed = now - startDate;
+
+            // Calcul des jours, heures, minutes et secondes
+            const days = Math.floor(timeElapsed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeElapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeElapsed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeElapsed % (1000 * 60)) / 1000);
+
+            // Affichage dans le HTML
+            document.getElementById('days').innerHTML = days + ' <span class="label">Jours</span>';
+            document.getElementById('hours').innerHTML = hours + ' <span class="label">Heures</span>';
+            document.getElementById('minutes').innerHTML = minutes + ' <span class="label">Minutes</span>';
+            document.getElementById('seconds').innerHTML = seconds + ' <span class="label">Secondes</span>';
+        }, 1000);
+    </script>
+</body>
+</html>
